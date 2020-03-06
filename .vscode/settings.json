@@ -1,0 +1,11 @@
+{"mssql.connections": [
+    {
+        "authenticationType": "Integrated",
+        "server": "localhost\\SQLEXPRESS",
+        "database": "",
+      
+ 
+       
+    }
+]
+}
