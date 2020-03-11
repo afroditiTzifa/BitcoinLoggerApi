@@ -18,10 +18,10 @@ namespace bitcoinlogger.Controllers
 
         
         private readonly IMapper _mapper;
-        private readonly IBitcoinLoggerRepository _repository;
-        private  IBitcoinLoggerServices _services;
+        private readonly IRepository _repository;
+        private  IServices _services;
   
-        public PricesController (IMapper mapper, IBitcoinLoggerRepository repository ) { 
+        public PricesController (IMapper mapper, IRepository repository ) { 
             _mapper= mapper;
             _repository =repository;
         }
@@ -31,7 +31,7 @@ namespace bitcoinlogger.Controllers
             
             List<BitcoinSource> sources = _repository.GetSources();
             string uri = sources.Single(x=>x.SourceId==sourceId).Uri;
-            _services= new BitcoinLoggerServicesFactory().Create(sourceId);
+            _services= new ServicesFactory().Create(sourceId);
             IBitcoinPriceDTO result = await _services.GetBitcoinPrice(uri);
             BitcoinPrice bitcoinPrice = _mapper.Map<BitcoinPrice>(result);
             bitcoinPrice.SourceId = sourceId;

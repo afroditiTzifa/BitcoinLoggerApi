@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace BitcoinLogger.Data.Repositories
 {
-    public interface IBitcoinLoggerRepository
+    public interface IRepository
     {
          List<BitcoinSource> GetSources();
 

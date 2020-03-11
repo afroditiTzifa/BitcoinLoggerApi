@@ -5,11 +5,11 @@ using System.Linq;
 
 namespace BitcoinLogger.Data.Repositories
 {
-    public class BitCoinLoggerSQLRepository :IBitcoinLoggerRepository
+    public class SQLRepository :IRepository
     {
-         private readonly BitcoinLoggerDB _context;
+         private readonly DB _context;
 
-         public BitCoinLoggerSQLRepository (BitcoinLoggerDB context) {
+         public SQLRepository (DB context) {
             _context = context;
 
         }

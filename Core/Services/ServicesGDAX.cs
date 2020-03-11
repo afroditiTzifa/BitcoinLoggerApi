@@ -8,7 +8,7 @@ using BitcoinLogger.Core.Models;
 
 namespace BitcoinLogger.Core.Services {
 
-public class BitcoinLoggerServicesBitmap : IBitcoinLoggerServices, IDisposable
+public class ServicesGDAX : IServices, IDisposable
 
     {
         static HttpClient client = new HttpClient ();
@@ -18,17 +18,17 @@ public class BitcoinLoggerServicesBitmap : IBitcoinLoggerServices, IDisposable
             
 
             IBitcoinPriceDTO responseObj =null;
-            responseObj = new BitcoinPriceBitstamp();
+            responseObj = new BitcoinPriceGDAX();
            
             try {
-                         
+                
+                client.DefaultRequestHeaders.Add("User-Agent", ".NET Framework Test Client");                
                 HttpResponseMessage response = await client.GetAsync (uri);
  
                 if (response.IsSuccessStatusCode) {
                     string result = await response.Content.ReadAsStringAsync ();
-                    
-                    responseObj = JsonConvert.DeserializeObject<BitcoinPriceBitstamp> (result);
                    
+                    responseObj = JsonConvert.DeserializeObject<BitcoinPriceGDAX> (result);
 
                 }
 

@@ -2,10 +2,10 @@ using BitcoinLogger.Data.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace BitcoinLogger.Data.Repositories {
-    public class BitcoinLoggerDB : DbContext {
+    public class DB : DbContext {
         public DbSet<BitcoinSource> Source { get; set; }
         public DbSet<BitcoinPrice> BitcoinPrice { get; set; }
    
-        public BitcoinLoggerDB (DbContextOptions<BitcoinLoggerDB> options) : base (options) { }
+        public DB (DbContextOptions<DB> options) : base (options) { }
     }
 }

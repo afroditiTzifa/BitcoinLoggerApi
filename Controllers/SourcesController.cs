@@ -16,10 +16,10 @@ namespace bitcoinlogger.Controllers
        
        
         private readonly IMapper _mapper;
-        private readonly IBitcoinLoggerRepository _repository;
+        private readonly IRepository _repository;
      
   
-        public SourcesController (IMapper mapper, IBitcoinLoggerRepository repository ) { 
+        public SourcesController (IMapper mapper, IRepository repository ) { 
             _mapper= mapper;
             _repository =repository;
         }

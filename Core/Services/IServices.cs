@@ -4,7 +4,7 @@ using BitcoinLogger.Core.Models;
 
 namespace BitcoinLogger.Core.Services {
 
-public interface IBitcoinLoggerServices{
+public interface IServices{
     Task<IBitcoinPriceDTO> GetBitcoinPrice (string uri);
  }
 

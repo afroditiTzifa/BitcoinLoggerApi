@@ -31,9 +31,9 @@ namespace BitcoinLogger
                     .AllowAnyMethod()
                     .AllowAnyHeader();
             }));
-            services.AddDbContext<BitcoinLoggerDB> (options => options.UseSqlServer (Configuration.GetConnectionString ("DefaultConnection")));
+            services.AddDbContext<DB> (options => options.UseSqlServer (Configuration.GetConnectionString ("DefaultConnection")));
             services.AddAutoMapper(typeof(Startup));
-            services.AddScoped<IBitcoinLoggerRepository, BitCoinLoggerSQLRepository> ();
+            services.AddScoped<IRepository, SQLRepository> ();
 
 
             services.AddControllersWithViews();
