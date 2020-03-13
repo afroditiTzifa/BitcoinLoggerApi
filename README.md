@@ -14,11 +14,29 @@ The following script creates database and tables
  ```
 create database BitcoinLogger;
 use BitcoinLogger;
+
 create table dbo.BitcoinPrice
 (Id bigint identity(1,1) primary key,
 SourceId int not null,
 Price float not null,
 Timestamp datetime not null)
+go
+
+create table dbo.BitcoinSource
+(Id int primary key,
+Description nvarchar(100) not null,
+Uri nvarchar(100) not null)
+go
+
+alter table dbo.BitcoinPrice
+ADD CONSTRAINT FK_SourceId
+FOREIGN KEY (SourceId) REFERENCES dbo.BitcoinSource(Id)
+go
+
+insert into dbo.BitcoinPrice
+values (),
+()
+
 ```
 
 ## Authors
