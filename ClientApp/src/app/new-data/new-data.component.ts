@@ -36,7 +36,7 @@ export class NewDataComponent implements OnInit {
         {
           next:response=> {this.bitcoinPrice=response;  
                            let fetchedData ="price: ".concat(this.bitcoinPrice.price.toFixed(2).toString()).concat(" ,timestamp: ").concat(this.bitcoinPrice.timestamp.toString());
-                           this.bitcoinSources.find(x => x.sourceId === sourceId).fetchedData = fetchedData;}, 
+                           this.bitcoinSources.find(x => x.id === sourceId).fetchedData = fetchedData;}, 
           error: err=>this.errorMessage=err
         }
         );

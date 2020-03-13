@@ -3,9 +3,9 @@ namespace BitcoinLogger.Core.Models
     public class BitcoinSourceDTO
     {
         
-        public int SourceId {get;set;}
+        public int Id {get;set;}
         
-        public string Source { get; set; }
+        public string Description { get; set; }
 
     }
 }

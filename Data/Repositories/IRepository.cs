@@ -1,14 +1,15 @@
-using BitcoinLogger.Data.Entities;
+
 using System.Collections.Generic;
+using BitcoinLogger.Data.Entities;
 
 namespace BitcoinLogger.Data.Repositories
 {
-    public interface IRepository
+    public interface IRepository 
     {
-         List<BitcoinSource> GetSources();
+          List<IBitcoinSource> GetSources();
 
-         void SaveBitcoinPrice(BitcoinPrice bitcoinPrice);
+          void SaveBitcoinPrice(IBitcoinPrice bitcoinPrice);
 
-         List<BitcoinPrice> GetBitcoinPrice();
+           List<IBitcoinPrice> GetBitcoinPrice();
     }
 }

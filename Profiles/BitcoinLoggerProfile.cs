@@ -8,10 +8,10 @@ namespace bitcoinlogger.Profiles
         public BitcoinLoggerProfile()
         {
 
-            CreateMap<BitcoinLogger.Data.Entities.BitcoinSource, BitcoinLogger.Core.Models.BitcoinSourceDTO>();
-            CreateMap<BitcoinLogger.Core.Models.BitcoinPriceBitstamp, BitcoinLogger.Data.Entities.BitcoinPrice>();
-            CreateMap<BitcoinLogger.Core.Models.BitcoinPriceGDAX, BitcoinLogger.Data.Entities.BitcoinPrice>();
-            CreateMap<BitcoinLogger.Data.Entities.BitcoinPrice, BitcoinLogger.Core.Models.BitcoinPriceDTO>().ForMember(c => c.Source, option => option.Ignore());
+            CreateMap<BitcoinLogger.Data.Entities.BitcoinSourceSQL, BitcoinLogger.Core.Models.BitcoinSourceDTO>();
+            CreateMap<BitcoinLogger.Core.Models.BitcoinPriceBitstamp, BitcoinLogger.Data.Entities.BitcoinPriceSQL>();
+            CreateMap<BitcoinLogger.Core.Models.BitcoinPriceGDAX, BitcoinLogger.Data.Entities.BitcoinPriceSQL>();
+            CreateMap<BitcoinLogger.Data.Entities.BitcoinPriceSQL, BitcoinLogger.Core.Models.BitcoinPriceDTO>().ForMember(c => c.Source, option => option.Ignore());
         }
         
     }

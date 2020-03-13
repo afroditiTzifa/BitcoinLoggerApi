@@ -1,5 +1,5 @@
 export interface IBitcoinSource {
-    sourceId: number;
-    source: string;    
+    id: number;
+    description: string;    
     fetchedData: string;
  }

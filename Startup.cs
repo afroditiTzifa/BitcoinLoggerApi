@@ -9,7 +9,7 @@ using AutoMapper;
 using BitcoinLogger.Data.Repositories;
 using BitcoinLogger.Core.Services;
 using Microsoft.EntityFrameworkCore;
-
+using BitcoinLogger.Data.Entities;
 
 namespace BitcoinLogger
 {
@@ -31,7 +31,7 @@ namespace BitcoinLogger
                     .AllowAnyMethod()
                     .AllowAnyHeader();
             }));
-            services.AddDbContext<DB> (options => options.UseSqlServer (Configuration.GetConnectionString ("DefaultConnection")));
+            services.AddDbContext<MyDBContext> (options => options.UseSqlServer (Configuration.GetConnectionString ("DefaultConnection")));
             services.AddAutoMapper(typeof(Startup));
             services.AddScoped<IRepository, SQLRepository> ();
 

@@ -13,7 +13,7 @@ namespace bitcoinlogger.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class PricesController :ControllerBase
+    public class PricesController :ControllerBase  
     {
 
         
@@ -29,14 +29,16 @@ namespace bitcoinlogger.Controllers
         [HttpGet("{sourceId}")]
         public async Task<IBitcoinPriceDTO> GetNewBitcoinPrice (int sourceId) {
             
-            List<BitcoinSource> sources = _repository.GetSources();
-            string uri = sources.Single(x=>x.SourceId==sourceId).Uri;
+          
+            List<IBitcoinSource> sources = _repository.GetSources();
+            string uri = sources.Single(x=>x.Id==sourceId).Uri;
             _services= new ServicesFactory().Create(sourceId);
             IBitcoinPriceDTO result = await _services.GetBitcoinPrice(uri);
-            BitcoinPrice bitcoinPrice = _mapper.Map<BitcoinPrice>(result);
+            IBitcoinPrice bitcoinPrice = _mapper.Map<IBitcoinPrice>(result);
             bitcoinPrice.SourceId = sourceId;
             _repository.SaveBitcoinPrice(bitcoinPrice);
             return result;
+            
             
         }
 
@@ -44,13 +46,13 @@ namespace bitcoinlogger.Controllers
         [HttpGet]
         public List<BitcoinPriceDTO> GetFetchedData() {
            
-            List<BitcoinPrice> savedData=_repository.GetBitcoinPrice();
-            List<BitcoinSource> sources = _repository.GetSources();
+            List<IBitcoinPrice> savedData=_repository.GetBitcoinPrice();
+            List<IBitcoinSource> sources = _repository.GetSources();
             List<BitcoinPriceDTO> result = new List<BitcoinPriceDTO>();
-            foreach (BitcoinPrice row in savedData )
+            foreach (IBitcoinPrice row in savedData )
             {
               BitcoinPriceDTO rowDTO= _mapper.Map<BitcoinPriceDTO>(row);
-              rowDTO.Source = sources.Single(x=>x.SourceId==row.SourceId).Source;
+              rowDTO.Source = sources.Single(x=>x.Id==row.SourceId).Description;
               result.Add(rowDTO);
             }
             return result;

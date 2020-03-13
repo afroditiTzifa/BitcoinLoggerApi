@@ -5,33 +5,33 @@ using System.Linq;
 
 namespace BitcoinLogger.Data.Repositories
 {
-    public class SQLRepository :IRepository
+    public class SQLRepository: IRepository
+                                                    
     {
-         private readonly DB _context;
+         private readonly MyDBContext _context;
 
-         public SQLRepository (DB context) {
+         public SQLRepository (MyDBContext context) {
             _context = context;
 
         }
-        public List<BitcoinSource> GetSources()
+       
+        public  List<IBitcoinSource> GetSources()
         {
-            List<BitcoinSource> result = new List<BitcoinSource>();
-            result.Add(new BitcoinSource(){SourceId=1, Source="Bitstamp", Uri="https://www.bitstamp.net/api/ticker/"});
-            result.Add(new BitcoinSource(){SourceId=2, Source="GDAX", Uri="https://api.gdax.com/products/BTC-USD/ticker"});
-            return result;
+            return _context.BitcoinSource.ToList<IBitcoinSource>();  
 
         }
+       
 
-        public void SaveBitcoinPrice(BitcoinPrice bitcoinPrice)
+        public void SaveBitcoinPrice(IBitcoinPrice bitcoinPrice)
         {
-             _context.BitcoinPrice.Add (bitcoinPrice);
+             _context.BitcoinPrice.Add((BitcoinPriceSQL)bitcoinPrice);
              bitcoinPrice.Timestamp= DateTime.Now;
             _context.SaveChanges ();
         }
 
-        public List<BitcoinPrice> GetBitcoinPrice()
+        public List<IBitcoinPrice> GetBitcoinPrice()
         {
-            return _context.BitcoinPrice.ToList();           
+            return _context.BitcoinPrice.ToList<IBitcoinPrice>();           
 
         }
     }

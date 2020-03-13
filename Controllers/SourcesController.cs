@@ -10,8 +10,7 @@ namespace bitcoinlogger.Controllers
 
 [ApiController]
 [Route("[controller]")]
-    public class SourcesController : ControllerBase
-
+    public class SourcesController: ControllerBase 
     {
        
        
@@ -27,7 +26,7 @@ namespace bitcoinlogger.Controllers
         [HttpGet]
         public IActionResult GetSources()
         {
-            List<BitcoinSource> sources =_repository.GetSources();
+            List<IBitcoinSource> sources =_repository.GetSources();
             return  Ok(_mapper.Map<List<BitcoinSourceDTO>>(sources));
 
         }
