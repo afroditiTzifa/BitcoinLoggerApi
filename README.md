@@ -34,9 +34,9 @@ FOREIGN KEY (SourceId) REFERENCES dbo.BitcoinSource(Id)
 go
 
 insert into dbo.BitcoinPrice
-values (),
-()
-
+values (1, 'Bitstamp', 'https://www.bitstamp.net/api/ticker/' ),
+       (2, 'GDAX', 'https://api.gdax.com/products/BTC-USD/ticker')
+ 
 ```
 
 ## Authors
