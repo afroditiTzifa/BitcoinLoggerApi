@@ -33,7 +33,7 @@ ADD CONSTRAINT FK_SourceId
 FOREIGN KEY (SourceId) REFERENCES dbo.BitcoinSource(Id)
 go
 
-insert into dbo.BitcoinPrice
+insert into dbo.BitcoinSource
 values (1, 'Bitstamp', 'https://www.bitstamp.net/api/ticker/' ),
        (2, 'GDAX', 'https://api.gdax.com/products/BTC-USD/ticker')
  
