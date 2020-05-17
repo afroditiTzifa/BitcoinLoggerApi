@@ -13,12 +13,11 @@ public class ServicesBitstamp : IServices, IDisposable
     {
         static HttpClient client = new HttpClient ();
 
-        public async Task<IBitcoinPriceDTO> GetBitcoinPrice (string uri) {
+        public async Task<ILiveData> GetBitcoinPrice (string uri) {
             
             
 
-            IBitcoinPriceDTO responseObj =null;
-            responseObj = new BitcoinPriceBitstamp();
+            ILiveData responseObj = new LiveDataBitstamp();
            
             try {
                          
@@ -27,7 +26,7 @@ public class ServicesBitstamp : IServices, IDisposable
                 if (response.IsSuccessStatusCode) {
                     string result = await response.Content.ReadAsStringAsync ();
                     
-                    responseObj = JsonConvert.DeserializeObject<BitcoinPriceBitstamp> (result);
+                    responseObj = JsonConvert.DeserializeObject<LiveDataBitstamp> (result);
                    
 
                 }

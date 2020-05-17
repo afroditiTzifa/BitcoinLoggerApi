@@ -2,7 +2,7 @@ using System;
 
 namespace BitcoinLogger.Core.Models
 {
-    public class BitcoinPriceDTO :IBitcoinPriceDTO
+    public class DTO 
     {
         public int SourceId {get;set;}
         public string Source {get;set;}
@@ -10,6 +10,7 @@ namespace BitcoinLogger.Core.Models
         public DateTime Timestamp { get; set; }
 
         public double Price { get; set; }
+        public int UserId {get;set;}
         
     }
 }

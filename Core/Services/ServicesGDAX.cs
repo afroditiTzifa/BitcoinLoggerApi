@@ -13,12 +13,11 @@ public class ServicesGDAX : IServices, IDisposable
     {
         static HttpClient client = new HttpClient ();
 
-        public async Task<IBitcoinPriceDTO> GetBitcoinPrice (string uri) {
+        public async Task<ILiveData> GetBitcoinPrice (string uri) {
             
             
 
-            IBitcoinPriceDTO responseObj =null;
-            responseObj = new BitcoinPriceGDAX();
+            ILiveData responseObj = new LiveDataGDAX();
            
             try {
                 
@@ -28,7 +27,7 @@ public class ServicesGDAX : IServices, IDisposable
                 if (response.IsSuccessStatusCode) {
                     string result = await response.Content.ReadAsStringAsync ();
                    
-                    responseObj = JsonConvert.DeserializeObject<BitcoinPriceGDAX> (result);
+                    responseObj = JsonConvert.DeserializeObject<LiveDataGDAX> (result);
 
                 }
 

@@ -4,7 +4,7 @@ using System;
 
 namespace BitcoinLogger.Core.Models
 {
-    public class BitcoinPriceGDAX :IBitcoinPriceDTO
+    public class LiveDataGDAX :ILiveData
     {
   
         [JsonProperty ("time")]

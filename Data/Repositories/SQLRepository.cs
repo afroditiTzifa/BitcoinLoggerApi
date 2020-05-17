@@ -25,7 +25,6 @@ namespace BitcoinLogger.Data.Repositories
         public void SaveBitcoinPrice(IBitcoinPrice bitcoinPrice)
         {
              _context.BitcoinPrice.Add((BitcoinPriceSQL)bitcoinPrice);
-             bitcoinPrice.Timestamp= DateTime.Now;
             _context.SaveChanges ();
         }
 

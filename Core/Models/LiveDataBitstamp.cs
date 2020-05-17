@@ -4,9 +4,9 @@ using Newtonsoft.Json.Converters;
 
 namespace BitcoinLogger.Core.Models
 {
-    public class BitcoinPriceBitstamp :IBitcoinPriceDTO
+    public class LiveDataBitstamp :ILiveData
     {
-  [JsonConverter(typeof (UnixDateTimeConverter))]
+        [JsonConverter(typeof (UnixDateTimeConverter))]
         [JsonProperty ("timestamp")]
         public DateTime Timestamp { get; set; }
         [JsonProperty ("last")]

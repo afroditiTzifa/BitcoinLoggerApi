@@ -10,6 +10,8 @@ namespace BitcoinLogger.Data.Entities
         public  DateTime Timestamp { get; set; }
 
         public  double Price { get; set; }
+
+        public int? UserId {get;set;}
       
     }
 }

@@ -7,13 +7,12 @@ using BitcoinLogger.Core.Services;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Linq;
-using Microsoft.AspNetCore.Cors;
 
 namespace bitcoinlogger.Api.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class PricesController :ControllerBase  
+    public class HistoryDataController :ControllerBase  
     {
 
         
@@ -21,42 +20,37 @@ namespace bitcoinlogger.Api.Controllers
         private readonly IRepository _repository;
         private  IServices _services;
   
-        public PricesController (IMapper mapper, IRepository repository ) { 
+        public HistoryDataController (IMapper mapper, IRepository repository ) { 
             _mapper= mapper;
             _repository =repository;
         }
         
-        [HttpGet("{sourceId}")]
-        public async Task<IBitcoinPriceDTO> GetNewBitcoinPrice (int sourceId) {
-            
-          
-            List<IBitcoinSource> sources = _repository.GetSources();
-            string uri = sources.Single(x=>x.Id==sourceId).Uri;
-            _services= new ServicesFactory().Create(sourceId);
-            IBitcoinPriceDTO result = await _services.GetBitcoinPrice(uri);
-            IBitcoinPrice bitcoinPrice = _mapper.Map<BitcoinPriceSQL>(result);
-            bitcoinPrice.SourceId = sourceId;
-            _repository.SaveBitcoinPrice(bitcoinPrice);
-            return result;
-            
-            
-        }
 
             
         [HttpGet]
-        public List<BitcoinPriceDTO> GetFetchedData() {
+        public List<DTO> Get() {
            
             List<IBitcoinPrice> savedData=_repository.GetBitcoinPrice();
             List<IBitcoinSource> sources = _repository.GetSources();
-            List<BitcoinPriceDTO> result = new List<BitcoinPriceDTO>();
+            List<DTO> result = new List<DTO>();
             foreach (IBitcoinPrice row in savedData )
             {
-              BitcoinPriceDTO rowDTO= _mapper.Map<BitcoinPriceDTO>(row);
+              DTO rowDTO= _mapper.Map<DTO>(row);
               rowDTO.Source = sources.Single(x=>x.Id==row.SourceId).Description;
               result.Add(rowDTO);
             }
             return result;
 
         }
+
+        [HttpPost]
+        public void Post(DTO historyData) {
+
+              IBitcoinPrice bitcoinPrice= _mapper.Map<BitcoinPriceSQL>(historyData);
+              _repository.SaveBitcoinPrice(bitcoinPrice);
+
+
+        }
+        
     }
 }
