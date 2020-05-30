@@ -20,5 +20,10 @@ namespace BitcoinLogger.Data.Repositories
         {
             throw new System.NotImplementedException();
         }
+
+        public int GetUserId(string username, string password)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

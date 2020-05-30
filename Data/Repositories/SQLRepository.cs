@@ -31,7 +31,11 @@ namespace BitcoinLogger.Data.Repositories
         public List<IBitcoinPrice> GetBitcoinPrice()
         {
             return _context.BitcoinPrice.ToList<IBitcoinPrice>();           
+        }
 
+        public int GetUserId(string username, string password)
+        {
+            return _context.User.Where(x=>x.Username == username && x.UserPassword == password).Select(x=>x.Id).SingleOrDefault();
         }
     }
 }

@@ -14,11 +14,10 @@ namespace bitcoinlogger.Api.Controllers
     [Route("[controller]")]
     public class HistoryDataController :ControllerBase  
     {
-
-        
+      
         private readonly IMapper _mapper;
         private readonly IRepository _repository;
-        private  IServices _services;
+
   
         public HistoryDataController (IMapper mapper, IRepository repository ) { 
             _mapper= mapper;
@@ -48,7 +47,6 @@ namespace bitcoinlogger.Api.Controllers
 
               IBitcoinPrice bitcoinPrice= _mapper.Map<BitcoinPriceSQL>(historyData);
               _repository.SaveBitcoinPrice(bitcoinPrice);
-
 
         }
         
