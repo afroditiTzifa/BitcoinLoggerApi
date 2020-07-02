@@ -6,7 +6,6 @@ namespace BitcoinLogger.Data.Repositories {
         public DbSet<BitcoinSourceSQL> BitcoinSource { get; set; }
         public DbSet<BitcoinPriceSQL> BitcoinPrice { get; set; }
          public DbSet<UserSQL> User { get; set; }
-   
         public MyDBContext (DbContextOptions<MyDBContext> options) : base (options) { }
     }
 }

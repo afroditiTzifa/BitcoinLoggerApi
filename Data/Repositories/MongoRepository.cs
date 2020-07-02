@@ -6,7 +6,7 @@ namespace BitcoinLogger.Data.Repositories
 {
     public class MongoRepository : IRepository
     {
-        public List<IBitcoinPrice> GetBitcoinPrice()
+        public List<IBitcoinPrice> GetBitcoinPrice(int userid)
         {
             throw new System.NotImplementedException();
         }
@@ -23,6 +23,11 @@ namespace BitcoinLogger.Data.Repositories
 
         public int GetUserId(string username, string password)
         {
+            throw new System.NotImplementedException();
+        }
+
+        public void SaveUser(IUser user)
+        {     
             throw new System.NotImplementedException();
         }
     }

@@ -1,17 +1,12 @@
 using Microsoft.AspNetCore.Mvc;
 using AutoMapper;
-using BitcoinLogger.Data.Entities;
-using BitcoinLogger.Core.Models;
 using BitcoinLogger.Data.Repositories;
-using BitcoinLogger.Core.Services;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using System.Linq;
+using BitcoinLogger.Data.Entities;
 
 namespace bitcoinlogger.Api.Controllers
 {
     [ApiController]
-    [Route("[controller]")]    
+    [Route("[controller]")]     
     public class UserDataController : ControllerBase
     {
          private readonly IMapper _mapper;
@@ -26,6 +21,12 @@ namespace bitcoinlogger.Api.Controllers
         public int Get(string username, string password)
         {
             return _repository.GetUserId(username, password);
+        }
+
+        [HttpPost]
+        public void Post([FromBody]UserSQL user)
+        {
+            _repository.SaveUser(user);
         }
     }
 

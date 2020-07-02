@@ -28,14 +28,20 @@ namespace BitcoinLogger.Data.Repositories
             _context.SaveChanges ();
         }
 
-        public List<IBitcoinPrice> GetBitcoinPrice()
+        public List<IBitcoinPrice> GetBitcoinPrice(int userid)
         {
-            return _context.BitcoinPrice.ToList<IBitcoinPrice>();           
+            return _context.BitcoinPrice.Where(x => x.UserId == userid).ToList<IBitcoinPrice>();           
         }
 
         public int GetUserId(string username, string password)
         {
-            return _context.User.Where(x=>x.Username == username && x.UserPassword == password).Select(x=>x.Id).SingleOrDefault();
+            return _context.User.Where(x=>x.Username == username && x.Password == password).Select(x=>x.Id).SingleOrDefault();
+        }
+
+        public void SaveUser(IUser user)
+        {     
+            _context.User.Add((UserSQL)user);
+            _context.SaveChanges();
         }
     }
 }

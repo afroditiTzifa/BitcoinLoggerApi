@@ -26,10 +26,11 @@ namespace bitcoinlogger.Api.Controllers
         
 
             
-        [HttpGet]
-        public List<DTO> Get() {
+        [HttpGet()]
+        [Route("{userid}")]
+        public List<DTO> Get(int userid) {
            
-            List<IBitcoinPrice> savedData=_repository.GetBitcoinPrice();
+            List<IBitcoinPrice> savedData=_repository.GetBitcoinPrice(userid);
             List<IBitcoinSource> sources = _repository.GetSources();
             List<DTO> result = new List<DTO>();
             foreach (IBitcoinPrice row in savedData )
@@ -43,9 +44,11 @@ namespace bitcoinlogger.Api.Controllers
         }
 
         [HttpPost]
-        public void Post(DTO historyData) {
+        [Route("{userid}")]
+        public void Post([FromBody]DTO historyData, int userid) {
 
               IBitcoinPrice bitcoinPrice= _mapper.Map<BitcoinPriceSQL>(historyData);
+              bitcoinPrice.UserId = userid;
               _repository.SaveBitcoinPrice(bitcoinPrice);
 
         }

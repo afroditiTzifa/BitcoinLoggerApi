@@ -12,9 +12,8 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using AutoMapper;
 using BitcoinLogger.Data.Repositories;
-using BitcoinLogger.Core.Services;
 using Microsoft.EntityFrameworkCore;
-using BitcoinLogger.Data.Entities;
+
 
 namespace bitcoinlogger.Api
 {
@@ -30,14 +29,14 @@ namespace bitcoinlogger.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-             services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
+            services.AddCors(o => o.AddPolicy("CORS", builder =>
             {
                 builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
             }));
             services.AddDbContext<MyDBContext>(options => options.UseSqlServer (Configuration.GetConnectionString ("DefaultConnection")));
             services.AddAutoMapper(typeof(Startup));
             services.AddScoped<IRepository, SQLRepository> ();
-            services.AddControllers();
+            services.AddControllers();        
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -48,11 +47,11 @@ namespace bitcoinlogger.Api
             {
                 app.UseDeveloperExceptionPage();
             }
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
            
             app.UseRouting();
-            app.UseCors();
-            
+            app.UseCors("CORS");
+
             app.UseAuthorization();
             app.UseEndpoints(endpoints =>
             {

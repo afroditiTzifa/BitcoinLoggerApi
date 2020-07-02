@@ -10,8 +10,10 @@ namespace BitcoinLogger.Data.Repositories
 
           void SaveBitcoinPrice(IBitcoinPrice bitcoinPrice);
 
-          List<IBitcoinPrice> GetBitcoinPrice();
+          List<IBitcoinPrice> GetBitcoinPrice(int userid);
 
           int GetUserId(string username, string password);
+
+          void SaveUser(IUser user);
     }
 }
