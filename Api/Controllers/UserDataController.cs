@@ -18,15 +18,27 @@ namespace bitcoinlogger.Api.Controllers
         }
 
         [Route("{username}/{password}")]
-        public int Get(string username, string password)
+        public IUser Get(string username, string password)
         {
-            return _repository.GetUserId(username, password);
+            return _repository.GetUser(username, password);
+        }
+
+        [Route("{username}")]
+        public bool Get(string username)
+        {
+            return _repository.ValidUsername(username);
         }
 
         [HttpPost]
-        public void Post([FromBody]UserSQL user)
+        public int Post([FromBody]UserSQL user)
         {
-            _repository.SaveUser(user);
+           return _repository.AddUser(user);
+        }
+
+         [HttpPut]
+        public void Put([FromBody]UserSQL user)
+        {
+            _repository.UpdateUser(user);
         }
     }
 

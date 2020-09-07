@@ -12,8 +12,12 @@ namespace BitcoinLogger.Data.Repositories
 
           List<IBitcoinPrice> GetBitcoinPrice(int userid);
 
-          int GetUserId(string username, string password);
+          IUser GetUser(string username, string password);
 
-          void SaveUser(IUser user);
+          int AddUser(IUser user);
+
+          void UpdateUser(IUser user);
+
+          bool ValidUsername(string username);
     }
 }

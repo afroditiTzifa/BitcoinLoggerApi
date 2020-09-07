@@ -47,7 +47,7 @@ namespace bitcoinlogger.Api.Controllers
         [Route("{userid}")]
         public void Post([FromBody]DTO historyData, int userid) {
 
-              IBitcoinPrice bitcoinPrice= _mapper.Map<BitcoinPriceSQL>(historyData);
+              IBitcoinPrice bitcoinPrice = _mapper.Map<BitcoinPriceSQL>(historyData);
               bitcoinPrice.UserId = userid;
               _repository.SaveBitcoinPrice(bitcoinPrice);
 

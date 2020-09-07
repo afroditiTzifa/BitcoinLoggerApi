@@ -21,13 +21,22 @@ namespace BitcoinLogger.Data.Repositories
             throw new System.NotImplementedException();
         }
 
-        public int GetUserId(string username, string password)
+        public IUser GetUser(string username, string password)
         {
             throw new System.NotImplementedException();
         }
 
-        public void SaveUser(IUser user)
+        public int AddUser(IUser user)
         {     
+            throw new System.NotImplementedException();
+        }
+        public  void UpdateUser(IUser user)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public bool ValidUsername(string username)
+        {
             throw new System.NotImplementedException();
         }
     }

@@ -2,6 +2,7 @@ using BitcoinLogger.Data.Entities;
 using System.Collections.Generic;
 using System;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace BitcoinLogger.Data.Repositories
 {
@@ -33,15 +34,27 @@ namespace BitcoinLogger.Data.Repositories
             return _context.BitcoinPrice.Where(x => x.UserId == userid).ToList<IBitcoinPrice>();           
         }
 
-        public int GetUserId(string username, string password)
+        public IUser GetUser(string username, string password)
         {
-            return _context.User.Where(x=>x.Username == username && x.Password == password).Select(x=>x.Id).SingleOrDefault();
+            return _context.User.Where(x=>x.Username == username && x.Password == password).SingleOrDefault();
         }
 
-        public void SaveUser(IUser user)
+        public int AddUser(IUser user)
         {     
             _context.User.Add((UserSQL)user);
             _context.SaveChanges();
+            return user.Id;
+        }
+
+        public  void UpdateUser(IUser user)
+        {
+            _context.Entry((UserSQL)user).State = EntityState.Modified;
+            _context.SaveChanges();
+        }
+
+        public bool ValidUsername(string username)
+        {
+            return _context.User.Where(x=>x.Username == username).FirstOrDefault() == null;
         }
     }
 }
