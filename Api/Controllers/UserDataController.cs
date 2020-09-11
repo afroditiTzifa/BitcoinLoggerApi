@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using AutoMapper;
 using BitcoinLogger.Data.Repositories;
 using BitcoinLogger.Data.Entities;
+using BitcoinLogger.Core.Models;
 
 namespace bitcoinlogger.Api.Controllers
 {
@@ -18,9 +19,10 @@ namespace bitcoinlogger.Api.Controllers
         }
 
         [Route("{username}/{password}")]
-        public IUser Get(string username, string password)
+        public UserDTO Get(string username, string password)
         {
-            return _repository.GetUser(username, password);
+            var user = _repository.GetUser(username, password);
+            return _mapper.Map<UserDTO>(user);
         }
 
         [Route("{username}")]
@@ -30,15 +32,17 @@ namespace bitcoinlogger.Api.Controllers
         }
 
         [HttpPost]
-        public int Post([FromBody]UserSQL user)
+        public int Post([FromBody]UserDTO user)
         {
-           return _repository.AddUser(user);
+           var entityUser= _mapper.Map<UserSQL>(user);
+           return _repository.AddUser(entityUser);
         }
 
          [HttpPut]
-        public void Put([FromBody]UserSQL user)
+        public void Put([FromBody]UserDTO user)
         {
-            _repository.UpdateUser(user);
+            var entityUser= _mapper.Map<UserSQL>(user);
+            _repository.UpdateUser(entityUser);
         }
     }
 

@@ -13,27 +13,28 @@ namespace BitcoinLogger.Data.Repositories
 
          public SQLRepository (MyDBContext context) {
             _context = context;
-
         }
        
         public  List<IBitcoinSource> GetSources()
         {
             return _context.BitcoinSource.ToList<IBitcoinSource>();  
-
         }
        
-
         public void SaveBitcoinPrice(IBitcoinPrice bitcoinPrice)
         {
-             _context.BitcoinPrice.Add((BitcoinPriceSQL)bitcoinPrice);
+            _context.BitcoinPrice.Add((BitcoinPriceSQL)bitcoinPrice);
             _context.SaveChanges ();
         }
 
-        public List<IBitcoinPrice> GetBitcoinPrice(int userid)
+        public List<IBitcoinPrice> GetBitcoinPrices(int userid)
         {
-            return _context.BitcoinPrice.Where(x => x.UserId == userid).ToList<IBitcoinPrice>();           
+            return _context.BitcoinPrice.Include(u => u.Source).Include(u => u.CurrencyPair).Where(x => x.UserId == userid).ToList<IBitcoinPrice>();           
         }
 
+        public List<ICurrencyPair> GetCurrrencyPairs()
+        {
+            return _context.CurrencyPair.ToList<ICurrencyPair>();
+        }
         public IUser GetUser(string username, string password)
         {
             return _context.User.Where(x=>x.Username == username && x.Password == password).SingleOrDefault();

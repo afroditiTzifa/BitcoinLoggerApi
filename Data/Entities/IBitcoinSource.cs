@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace BitcoinLogger.Data.Entities
 {
     public interface  IBitcoinSource
@@ -7,5 +9,6 @@ namespace BitcoinLogger.Data.Entities
         public  string Description { get; set; }
 
         public  string Uri {get;set;}
+
     }
 }

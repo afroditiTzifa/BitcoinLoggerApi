@@ -6,7 +6,7 @@ namespace BitcoinLogger.Data.Repositories
 {
     public class MongoRepository : IRepository
     {
-        public List<IBitcoinPrice> GetBitcoinPrice(int userid)
+        public List<IBitcoinPrice> GetBitcoinPrices(int userid)
         {
             throw new System.NotImplementedException();
         }
@@ -17,6 +17,11 @@ namespace BitcoinLogger.Data.Repositories
         }
 
         public void SaveBitcoinPrice(IBitcoinPrice bitcoinPrice)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public List<ICurrencyPair> GetCurrrencyPairs()
         {
             throw new System.NotImplementedException();
         }

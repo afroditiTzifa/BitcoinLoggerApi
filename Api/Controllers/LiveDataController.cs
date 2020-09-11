@@ -24,28 +24,29 @@ namespace bitcoinlogger.Api.Controllers
             _repository =repository;
         }
         
-        public async Task<List<DTO>> Get () {
+        [Route("{currrencyPairId}")]
+        public async Task<List<BitcoinPriceDTO>> Get (int currrencyPairId) {
             
-            List<DTO> result = new List<DTO>();
-            List<IBitcoinSource> sources = _repository.GetSources();
-            foreach(IBitcoinSource source in sources)
+            var result = new List<BitcoinPriceDTO>();
+            var sources = _repository.GetSources();
+            var currencyPairs = _repository.GetCurrrencyPairs();
+            foreach(var source in sources)
             {
-                string uri = sources.Single(x => x.Id == source.Id).Uri;
+                var uri = sources.Single(x => x.Id == source.Id).Uri;
+                var currencyPair = currencyPairs.Single(x=> x.Id == currrencyPairId);
+                uri = uri.Replace("{currencyPair}", currencyPair.Description);
                 _services= new ServicesFactory().Create(source.Id);
-                ILiveData liveData = await _services.GetBitcoinPrice(uri);
-                DTO row = new DTO()
-                {
-                    Source=source.Description,
-                    SourceId=source.Id,
-                    Price = liveData.Price,
-                    Timestamp = liveData.Timestamp
-                };
-              
+                var liveData = await _services.GetBitcoinPrice(uri);
+                var row = _mapper.Map<BitcoinPriceDTO>(liveData);
+                row.Source = source.Description;
+                row.SourceId = source.Id;
+                row.CurrencyPairId = currencyPair.Id;
+                row.CurrencyPair = currencyPair.Description;
+
                 result.Add(row);
             }
                
             return result;
-            
             
         }
 
