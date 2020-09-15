@@ -13,30 +13,25 @@ public class ServicesGDAX : IServices, IDisposable
     {
         static HttpClient client = new HttpClient ();
 
-        public async Task<ILiveData> GetBitcoinPrice (string uri) {
-            
-            
-
-            ILiveData responseObj = new LiveDataGDAX();
-           
-            try {
-                
+        public async Task<ILiveData> GetBitcoinPrice (string uri) 
+        {
+            try 
+            {    
                 client.DefaultRequestHeaders.Add("User-Agent", ".NET Framework Test Client");                
-                HttpResponseMessage response = await client.GetAsync (uri);
- 
-                if (response.IsSuccessStatusCode) {
+                var response = await client.GetAsync (uri);
+                if (response.IsSuccessStatusCode) 
+                {
                     string result = await response.Content.ReadAsStringAsync ();
-                   
-                    responseObj = JsonConvert.DeserializeObject<LiveDataGDAX> (result);
-
+                    return JsonConvert.DeserializeObject<LiveDataGDAX> (result);
                 }
+                return null;
 
             } catch (Exception ex) 
             {
                 Console.Write(ex.Message);
+                return null;
                 //2do 
             }
-            return responseObj;
         }
 
         public void Dispose () {

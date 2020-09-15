@@ -13,30 +13,24 @@ public class ServicesBitstamp : IServices, IDisposable
     {
         static HttpClient client = new HttpClient ();
 
-        public async Task<ILiveData> GetBitcoinPrice (string uri) {
-            
-            
-
-            ILiveData responseObj = new LiveDataBitstamp();
-           
-            try {
-                         
-                HttpResponseMessage response = await client.GetAsync (uri);
- 
-                if (response.IsSuccessStatusCode) {
-                    string result = await response.Content.ReadAsStringAsync ();
-                    
-                    responseObj = JsonConvert.DeserializeObject<LiveDataBitstamp> (result);
-                   
-
+        public async Task<ILiveData> GetBitcoinPrice (string uri) 
+        {
+            try  
+            {            
+                var response = await client.GetAsync (uri);
+                if (response.IsSuccessStatusCode) 
+                {
+                    var result = await response.Content.ReadAsStringAsync ();
+                    return JsonConvert.DeserializeObject<LiveDataBitstamp> (result);
                 }
+                return null;
 
             } catch (Exception ex) 
             {
                 Console.Write(ex.Message);
+                return null;
                 //2do 
             }
-            return responseObj;
         }
 
         public void Dispose () {
