@@ -37,7 +37,7 @@ namespace bitcoinlogger.Api
             //services.AddDbContext<MyDBContext>(options => options.UseSqlServer (Configuration.GetConnectionString ("DefaultConnection")));
             
             var connectionString = Configuration["Connectionstrings:database"];
-            var envVar = Environment.GetEnvironmentVariable("DATABASE_URL");
+            /*var envVar = Environment.GetEnvironmentVariable("DATABASE_URL");
             if (!string.IsNullOrEmpty(envVar))
             {
                var uri = new Uri(envVar);
@@ -46,6 +46,7 @@ namespace bitcoinlogger.Api
                connectionString =  "; Database=" + uri.AbsolutePath.Substring(1) + "; Username=" + username +
                                    "; Password=" + password +  "; Port=" + uri.Port + "; SSL Mode=Require; Trust Server Certificate=true;";
             }
+            */
             services.AddDbContext<MyDBContext>(opt =>opt.UseNpgsql(connectionString));
             
             services.AddAutoMapper(typeof(Startup));
