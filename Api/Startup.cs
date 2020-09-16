@@ -34,20 +34,19 @@ namespace bitcoinlogger.Api
                 builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
             }));
 
-            //services.AddDbContext<MyDBContext>(options => options.UseSqlServer (Configuration.GetConnectionString ("DefaultConnection")));
-            
-            var connectionString = Configuration["Connectionstrings:database"];
-            /*var envVar = Environment.GetEnvironmentVariable("DATABASE_URL");
-            if (!string.IsNullOrEmpty(envVar))
+             
+            if(Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "production")
             {
-               var uri = new Uri(envVar);
-               var username = uri.UserInfo.Split(':')[0];
-               var password = uri.UserInfo.Split(':')[1];
-               connectionString =  "; Database=" + uri.AbsolutePath.Substring(1) + "; Username=" + username +
-                                   "; Password=" + password +  "; Port=" + uri.Port + "; SSL Mode=Require; Trust Server Certificate=true;";
+                var connectionString = Environment.GetEnvironmentVariable("CONNECTION_STRING");
+                services.AddDbContext<MyDBContext>(opt =>opt.UseNpgsql(connectionString));
+
             }
-            */
-            services.AddDbContext<MyDBContext>(opt =>opt.UseNpgsql(connectionString));
+            else 
+            {
+                var connectionString = Configuration["Connectionstrings:database"];
+                services.AddDbContext<MyDBContext>(opt =>opt.UseSqlServer(connectionString));
+            }
+                
             
             services.AddAutoMapper(typeof(Startup));
             services.AddScoped<IRepository, SQLRepository> ();
