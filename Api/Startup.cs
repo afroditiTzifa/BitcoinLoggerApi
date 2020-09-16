@@ -38,8 +38,6 @@ namespace bitcoinlogger.Api
             if(Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "production")
             {
                 var connectionString = Environment.GetEnvironmentVariable("CONNECTION_STRING");
-                if (connectionString == null)
-                    connectionString="Host=ec2-52-31-233-101.eu-west-1.compute.amazonaws.com;Port=5432;Username=ynbwflaaufszsr;Password=fa91c3f82bd80ecdfc023a849b38e1d39d6e0b359c8f10cbb298413dda81e5de;Database=dfkn0hst18sq2p; SSL Mode=Require; Trust Server Certificate=true;";
                 services.AddDbContext<MyDBContext>(opt =>opt.UseNpgsql(connectionString));
 
             }
