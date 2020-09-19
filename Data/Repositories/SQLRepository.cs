@@ -28,7 +28,8 @@ namespace BitcoinLogger.Data.Repositories
 
         public List<IBitcoinPrice> GetBitcoinPrices(int userid)
         {
-            return _context.BitcoinPrice.Include(u => u.Source).Include(u => u.CurrencyPair).Where(x => x.UserId == userid).ToList<IBitcoinPrice>();           
+            return _context.BitcoinPrice.Include(u => u.Source).Include(u => u.CurrencyPair)
+            .Where(x => x.UserId == userid).ToList<IBitcoinPrice>();           
         }
 
         public List<ICurrencyPair> GetCurrrencyPairs()
@@ -37,7 +38,7 @@ namespace BitcoinLogger.Data.Repositories
         }
         public IUser GetUser(string username, string password)
         {
-            return _context.User.Where(x=>x.Username == username && x.Password == password).SingleOrDefault();
+            return _context.User.SingleOrDefault(x=>x.Username == username && x.Password == password);
         }
 
         public int AddUser(IUser user)
@@ -55,7 +56,7 @@ namespace BitcoinLogger.Data.Repositories
 
         public bool ValidUsername(string username)
         {
-            return _context.User.Where(x=>x.Username == username).FirstOrDefault() == null;
+            return _context.User.SingleOrDefault(x=>x.Username == username) == null;
         }
     }
 }
