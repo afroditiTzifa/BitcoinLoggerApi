@@ -1,4 +1,4 @@
-# BitcoinLogger
+# BitcoinLoggerApi
 The application is a web platform that fetches Bitcoin price (BTC/USD) from multiple sources and presents them to the user.
 It consumes 2 BTC/USD price sources:
 1. Bitstamp: https://www.bitstamp.net/api/ticker/ 
