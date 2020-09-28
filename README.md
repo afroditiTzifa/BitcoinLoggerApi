@@ -94,7 +94,6 @@ curl -k -X GET http://localhost:5001/HistoryData/1
 and you'll get all stored data for user 1
 ```
 [
-    [
     {
         "sourceId": 1,
         "source": "Bitstamp",
@@ -125,7 +124,6 @@ and you'll get all stored data for user 1
         "ask": 9362,
         "volume": 584
     }
-]
 ]
 ```
 ```
