@@ -12,7 +12,7 @@ In order to run this sample locally, the BitcoinLogger database is needed. Insta
 ```
     dotnet ef migrations add InitialCreate
     dotnet ef database update
-    ```
+```
 
 Make sure you have .NET Core 3.1 SDK installed on your machine. Clone this repo in a directory on your computer and then configure the connection string in appsettings.json.
 To run and test the REST API locally, just run
