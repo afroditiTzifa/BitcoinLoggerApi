@@ -88,6 +88,66 @@ and you'll get Bitcoin real time price by two popular crypto exchanges; Bitstamp
     }
 ]
 ```
+```
+curl -k -X GET http://localhost:5001/HistoryData/1
+```
+and you'll get all stored data for user 1
+```
+[
+    [
+    {
+        "sourceId": 1,
+        "source": "Bitstamp",
+        "userId": 1,
+        "currencyPairId": 1,
+        "currencyPair": "BTC-USD",
+        "timestamp": "2020-09-16T00:00:00+00:00",
+        "lastPrice": 10893,
+        "highPrice": 10950,
+        "lowPrice": 10663,
+        "openPrice": 10785,
+        "bid": 10888,
+        "ask": 10894,
+        "volume": 7265
+    },
+    {
+        "sourceId": 2,
+        "source": "GDAX",
+        "userId": 1,
+        "currencyPairId": 2,
+        "currencyPair": "BTC-EUR",
+        "timestamp": "2020-09-19T16:05:40.903553+00:00",
+        "lastPrice": 9362,
+        "highPrice": null,
+        "lowPrice": null,
+        "openPrice": null,
+        "bid": 9358,
+        "ask": 9362,
+        "volume": 584
+    }
+]
+]
+```
+```
+curl -d '{
+        "sourceId": 2,
+        "source": "GDAX",
+        "userId": 1,
+        "currencyPairId": 2,
+        "currencyPair": "BTC-EUR",
+        "timestamp": "2020-09-19T16:05:40.903553+00:00",
+        "lastPrice": 9362,
+        "highPrice": null,
+        "lowPrice": null,
+        "openPrice": null,
+        "bid": 9358,
+        "ask": 9362,
+        "volume": 584
+    }' -H 'Content-Type: application/json' POST http://localhost:5001/HistoryData/1
+```
+and you'll post a new record to db
+```
+
 
 ## Authors
 
