@@ -20,14 +20,17 @@ To run and test the REST API locally, just run
 dotnet run
 ```
 .NET will start the HTTP server and when everything is up and running you'll see something like
+```
 Now listening on: https://localhost:5001
+```
 
 
 Using a REST Client (like Insomnia, Postman or curl), you can now call your API, for example:
-
+```
 curl -k -X GET http://localhost:5001/CurrencyPairData
+```
 and you'll get all available Currency Pairs
-
+```
 [
     {
         "id": 1,
@@ -46,10 +49,12 @@ and you'll get all available Currency Pairs
         "description": "BTC-PAX"
     }
 ]
-
+```
+```
 curl -k -X GET http://localhosts:5001/LiveData/1
+```
 and you'll get Bitcoin real time price by two popular crypto exchanges; Bitstamp and GDAX for BTC/USD CurrencyPair.
-
+```
 [
     {
         "sourceId": 1,
@@ -82,8 +87,6 @@ and you'll get Bitcoin real time price by two popular crypto exchanges; Bitstamp
         "volume": 4741.64994635
     }
 ]
-
-
 ```
 
 ## Authors
