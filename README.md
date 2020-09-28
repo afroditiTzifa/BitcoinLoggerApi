@@ -8,21 +8,17 @@ This application is a simple startup project using ASP.NET Core 3.1 for backend 
 
 ## Getting Started
 
-In order to run this sample, the BitcoinLogger database is needed. Install BitcoinLogger sample database:
+In order to run this sample locally, the BitcoinLogger database is needed. Install BitcoinLogger sample database:
+    dotnet ef migrations add InitialCreate
+    dotnet ef database update
 
-dotnet ef migrations add InitialCreate
-dotnet ef database updata
-
-
-
-Run sample locally
 Make sure you have .NET Core 3.1 SDK installed on your machine. Clone this repo in a directory on your computer and then configure the connection string in appsettings.json.
 To run and test the REST API locally, just run
-
 dotnet run
 .NET will start the HTTP server and when everything is up and running you'll see something like
-
 Now listening on: https://localhost:5001
+
+
 Using a REST Client (like Insomnia, Postman or curl), you can now call your API, for example:
 
 curl -k -X GET http://localhost:5001/CurrencyPairData
