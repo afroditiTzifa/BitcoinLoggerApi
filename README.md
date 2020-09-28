@@ -1,9 +1,7 @@
 # BitcoinLoggerApi
-The application is a web platform that fetches Bitcoin price (BTC/USD) from multiple sources and presents them to the user.
-It consumes 2 BTC/USD price sources:
-1. Bitstamp: https://www.bitstamp.net/api/ticker/ 
-2. GDAX: https://api.gdax.com/products/BTC-USD/ticker 
-This application is a simple startup project using ASP.NET Core 3.1 for backend implementatin and Angular 8 for frontend implementation 
+This is a REST API using ASP.NET Core 3.1 that fetches Bitcoin price by two popular crypto exchanges; Bitstamp and GDAX for 4 different Currency Pairs: BTC/USD, BTC/EUR, BTC-GBP and BTC/PAX and stores them locally in SQL Server database
+You will find a pushished version in ```https://bitcoin-logger-api.herokuapp.com```.  In published version data are stored in PostgreSQL database.
+ 
 
 
 ## Getting Started
