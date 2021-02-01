@@ -19,7 +19,7 @@ namespace bitcoinlogger.Api
 {
     public class Startup
     {
-        //test comment
+        //test comment2
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
